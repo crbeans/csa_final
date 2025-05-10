@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>csa-final-project-backend</artifactId>
+	<artifactId>csa-final-project</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>csa-final-project-backend</name>
+	<name>csa-final-project</name>
 	<description>Backend for our csa final project</description>
 	<url/>
 	<licenses>

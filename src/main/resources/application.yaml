@@ -2,11 +2,15 @@ server:
   port: 8080
   ssl:
     enabled: true
-    key-store: classpath:csafinal.jks
+    key-store: classpath:keystore/csa-final-proj.p12
     key-store-password: csafinalproj
     key-store-type: PKCS12
-    key-alias: my_ssl_key
+    key-alias: csa-final-project-key
+
+trust:
+  store: classpath:keystore/csa-final-proj.p12
+  password: csafinalproj
 
 spring:
   application:
-    name: csa-final-project-backend
+    name: csa-final-project
