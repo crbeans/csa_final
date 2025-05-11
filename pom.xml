@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>messaging-stomp-websocket</artifactId>
+	<artifactId>csa-final-project-backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>messaging-stomp-websocket</name>
-	<description>Demo project for Spring Boot</description>
+	<name>csa-final-project-backend</name>
+	<description>Backend for our csa final project</description>
 	<url/>
 	<licenses>
 		<license/>
