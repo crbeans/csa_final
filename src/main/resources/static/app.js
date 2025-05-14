@@ -1,5 +1,9 @@
 const stompClient = new StompJs.Client({
-  brokerURL: `${window.location.protocol == 'https:' ? "wss://csa-final-project.onrender.com/ws" : "ws://localhost:8080/ws"}`,
+  brokerURL: `${
+    window.location.protocol == "https:"
+      ? "wss://csa-final-project.onrender.com/ws"
+      : "ws://localhost:8080/ws"
+  }`,
 });
 
 stompClient.onConnect = (frame) => {
@@ -47,6 +51,13 @@ function sendName() {
   });
 }
 
+function joinGame() {
+  stompClient.publish({
+    destination: "/app/join",
+    body: JSON.stringify({ name: $("#playerName").val() }),
+  });
+}
+
 function showGreeting(message) {
   $("#greetings").append("<tr><td>" + message + "</td></tr>");
 }
@@ -56,4 +67,5 @@ $(function () {
   $("#connect").click(() => connect());
   $("#disconnect").click(() => disconnect());
   $("#send").click(() => sendName());
+  $("#joinGame").click(() => joinGame());
 });
