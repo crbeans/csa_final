@@ -52,6 +52,9 @@ function sendName() {
 }
 
 function joinGame() {
+  stompClient.subscribe("/topic/joined", (joinMsg) => {
+    showGreeting(JSON.parse(joinMsg.body).content);
+  });
   stompClient.publish({
     destination: "/app/join",
     body: JSON.stringify({ name: $("#playerName").val() }),

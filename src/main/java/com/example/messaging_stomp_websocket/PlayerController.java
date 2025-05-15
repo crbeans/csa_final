@@ -11,12 +11,12 @@ public class PlayerController {
     private static ArrayList<Player> playerList = new ArrayList<>();
 
     @MessageMapping("/join")
-    @SendTo("topic/joined")
-    public Player player(JoiningPlayer joiningPlayer) throws Exception {
+    @SendTo("/topic/joined")
+    public MessageContent player(JoiningPlayer joiningPlayer) throws Exception {
         Player a = new Player(joiningPlayer.getName());
         playerList.add(a);
-        System.out.println("Joined");
-        System.out.println(playerList);
-        return a;
+        System.out.println("Player Joined: "+joiningPlayer.getName());
+        // onPlayerJoin(a);
+        return new MessageContent(a.getName() + " has joined!");
     }
 }
