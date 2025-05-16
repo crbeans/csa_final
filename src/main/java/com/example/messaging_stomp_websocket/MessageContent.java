@@ -1,13 +1,13 @@
 package com.example.messaging_stomp_websocket;
 
-public class Greeting {
+public class MessageContent {
 
   private String content;
 
-  public Greeting() {
+  public MessageContent() {
   }
 
-  public Greeting(String content) {
+  public MessageContent(String content) {
     this.content = content;
   }
 

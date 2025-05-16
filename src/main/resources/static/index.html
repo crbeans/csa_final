@@ -12,6 +12,9 @@
         integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@7.0.0/bundles/stomp.umd.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script type="module" src="joinPage.js"></script>
 </head>
 
 <body>
@@ -24,14 +27,15 @@
     <form class="d-flex flex-row m-5">
         <div class=" flex-grow-1">
             <div class="form-floating">
-                <input type="input" id="send" class="form-control" placeholder="Enter" required></input>
+                <input type="text" id="input" class="form-control" placeholder="Enter" required></input>
                 <label for="input">Enter Name</label>
             </div>
         </div>
-        <button class="btn btn-primary btn-lg mx-2">Submit</button>
+        <button class="btn btn-primary btn-lg mx-2" id="joinButton" type="submit">Submit</button>
     </form>
+
     <!--Next Screen Button-->
-    <a href="game.html"><button class="btn btn-secondary btn-lg">game.html</button></a>
+    <!-- <a href="game.html"><button class="btn btn-secondary btn-lg">game.html</button></a> -->
     <!--For the rules-->
     <button class="btn btn-primary position-fixed top-0 end-0 m-3 z-3 btn-lg" data-bs-toggle="modal" data-bs-target="#modal">Rules</button>
         <div class="text-right">
@@ -51,14 +55,6 @@
                 </div>
             </div>
         </div>
-    <!--Testing-->
-    <div class="container-fluid">
-        <div class="text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum, ullam modi. Laborum est beatae ipsa recusandae molestias at, rem porro.
-        </div>
-    </div>
-    <!--Red player image-->
-    <div class="card" style="width: 75px">
-            <img class="card-img-top" src="./images/blue_player.png" />
-        </div>
-</body>
+      </div>
+  </body>
+</html>

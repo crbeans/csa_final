@@ -12,6 +12,9 @@
         integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@7.0.0/bundles/stomp.umd.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script type="module" src="gamePage.js"></script>
 </head>
 
 <body>
@@ -33,15 +36,15 @@
         <form class="d-flex flex-row">
             <div class=" flex-grow-1">
                 <div class="form-floating">
-                <input type="input" id="send" class="form-control" placeholder="Enter" required></input>
+                <input type="input" id="answer" class="form-control" placeholder="Enter" required></input>
                 <label for="input">Answer</label>
                 </div>
             </div>
-            <button class="btn btn-primary btn-lg mx-2">Submit</button>
+            <button class="btn btn-primary btn-lg mx-2" id="submitAnswer" type="button">Submit</button>
         </form>
         <!--MOVE TO DIFFERENT SCREEN-->
-        <a href="test.html"><button class="btn btn-secondary">test.html</button></a>
-        <a href="index.html"><button class="btn btn-secondary btn-lg">index.html</button></a>
+        <!-- <a href="test.html"><button class="btn btn-secondary">test.html</button></a>
+        <a href="index.html"><button class="btn btn-secondary btn-lg">index.html</button></a> -->
 
         
         <!--IMAGE TESTING FIX SOON-->
