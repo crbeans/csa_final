@@ -12,6 +12,9 @@
         integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@7.0.0/bundles/stomp.umd.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script type="module" src="joinPage.js"></script>
 </head>
 
 <body>
@@ -24,14 +27,15 @@
     <form class="d-flex flex-row m-5">
         <div class=" flex-grow-1">
             <div class="form-floating">
-                <input type="input" id="send" class="form-control" placeholder="Enter" required></input>
+                <input type="text" id="input" class="form-control" placeholder="Enter" required></input>
                 <label for="input">Enter Name</label>
             </div>
         </div>
-        <button class="btn btn-primary btn-lg mx-2">Submit</button>
+        <button class="btn btn-primary btn-lg mx-2" id="joinButton" type="submit">Submit</button>
     </form>
+
     <!--Next Screen Button-->
-    <a href="game.html"><button class="btn btn-secondary btn-lg">game.html</button></a>
+    <!-- <a href="game.html"><button class="btn btn-secondary btn-lg">game.html</button></a> -->
     <!--For the rules-->
     <button class="btn btn-primary position-fixed top-0 end-0 m-3 z-3 btn-lg" data-bs-toggle="modal" data-bs-target="#modal">Rules</button>
         <div class="text-right">
@@ -52,34 +56,5 @@
             </div>
         </div>
       </div>
-
-      <form class="form-inline">
-        <div class="form-group">
-          <label for="playerName">Player name</label>
-          <input
-            type="text"
-            id="playerName"
-            class="form-control"
-            placeholder="Your player name here..."
-          />
-        </div>
-        <button id="joinGame" class="btn btn-default" type="submit">
-          Join Game
-        </button>
-      </form>
-
-      <div class="row">
-        <div class="col-md-12">
-          <table id="conversation" class="table table-striped">
-            <thead>
-              <tr>
-                <th>Greetings</th>
-              </tr>
-            </thead>
-            <tbody id="greetings"></tbody>
-          </table>
-        </div>
-      </div>
-    </div>
   </body>
 </html>

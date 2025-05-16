@@ -1,4 +1,4 @@
-package com.example.messaging_stomp_websocket;
+package com.example.messaging_stomp_websocket.Players;
 
 public class JoiningPlayer {
 

@@ -1,4 +1,4 @@
-package com.example.messaging_stomp_websocket;
+package com.example.messaging_stomp_websocket.Players;
 
 import java.util.ArrayList;
 
@@ -6,9 +6,11 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 
+import com.example.messaging_stomp_websocket.MessageContent;
+
 @Controller
 public class PlayerController {
-    private static ArrayList<Player> playerList = new ArrayList<>();
+    public static ArrayList<Player> playerList = new ArrayList<>();
 
     @MessageMapping("/join")
     @SendTo("/topic/joined")
