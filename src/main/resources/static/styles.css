@@ -19,7 +19,7 @@ body {
     min-height: 50px;
     font-size: 2rem;
   }
-  
+/*  
   @media (min-width: 576px) {
     body::before {
       content: "SM";

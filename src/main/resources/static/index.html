@@ -18,43 +18,382 @@
 </head>
 
 <body>
-    <!--Title-->
-    <div class="text-center m-5">
-        <h1>Welcome to [game]!</h1>
-        <h4>Read the Rules</h4>
-    </div>
-    <!--Enter Name-->
-    <form class="d-flex flex-row m-5">
-        <div class=" flex-grow-1">
-            <div class="form-floating">
-                <input type="text" id="input" class="form-control" placeholder="Enter" required></input>
-                <label for="input">Enter Name</label>
-            </div>
-        </div>
-        <button class="btn btn-primary btn-lg mx-2" id="joinButton" type="submit">Submit</button>
-    </form>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 fixed-top">
+        <div class="container">
+            <a href="#" class="navbar-brand"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu"> <span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navmenu">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                <a href="#learn" class="nav-link">What You'll Learn</a>
+                </li>
+                <li class="nav-item">
+                <a href="#questions" class="nav-link">Questions</a>
+                </li>
+                <li class="nav-item">
+                <a href="#instructors" class="nav-link">Instructors</a>
+                </li>
+            </ul>
 
-    <!--Next Screen Button-->
-    <!-- <a href="game.html"><button class="btn btn-secondary btn-lg">game.html</button></a> -->
-    <!--For the rules-->
-    <button class="btn btn-primary position-fixed top-0 end-0 m-3 z-3 btn-lg" data-bs-toggle="modal" data-bs-target="#modal">Rules</button>
-        <div class="text-right">
-            <div class="modal" id="modal">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                            <div class="text-center">
-                                <div class="border p-2">
-                                    Rules
-                                </div>
-                            </div>
-                        <div class="border p-3">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat itaque autem quaerat vitae?
-                            Voluptatem incidunt quidem velit natus provident illo.
-                        </div>
-                    </div>
+
+                    <a href="game.html"><button class="btn btn-secondary">game.html</button></a>
+                    <a href="main.html"><button class="btn btn-secondary">main.html</button></a>
+
+
+        </div>
+    </div>
+    </nav>
+
+    <!-- Showcase -->
+    <section class="bg-dark text-light p-5 p-lg-0 pt-lg-5 text-center text-sm-start">
+        <div class="container">
+            <div class="d-sm-flex align-items-center justify-content-between">
+                <div>
+                    <h1>Welcome to <span class="text-warning"> [Game] </span></h1>
+                    <p class="lead my-4">
+                    Play with your friends and have a good time! Read the rules if you are confused
+                    </p>
                 </div>
             </div>
         </div>
-      </div>
-  </body>
-</html>
+    </section>
+
+    <!-- Enter Username 
+     Fix the id on it to point to isaac backend-->
+    <section class="bg-primary text-light p-5">
+        <div class="container">
+            <div class="d-md-flex justify-content-between align-items-center">
+                <h3 class="mb-3 mb-md-0">Enter Your Username!</h3>
+                <form class="d-flex flex-grow-1 p-5">
+                    <div class="form-floating flex-grow-1">
+                        <div class="form-floating">
+                        <input type="text" id="input" class="form-control" placeholder="Enter"></input>
+                        <label for="input">Enter Username</label>
+                        </div>
+                    </div>
+                    <button class="btn btn-dark btn-lg mx-2" id="submitAnswer" type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Boxes -->
+     <!--Expect Box-->
+    <section class="p-5">
+        <div class="container">
+            <div class="row text-center g-4">
+                <div class="col-md">
+                    <div class="card bg-secondary text-light">
+                        <div class="card-body text-center">
+                            <div class="h1 mb-3">
+                                <i class="bi bi-laptop"></i>
+                            </div>
+                            <h3 class="card-title mb-3">What to Expect</h3>
+                            <p class="card-text">
+                                Quick rounds, ridiculous prompts, and even more ridiculous answers. Compete for laughs and bragging rights.
+
+                            </p>
+                        </div>
+                    </div>
+                </div>
+          <!--Play Box-->
+            <div class="col-md">
+                <div class="card bg-secondary text-light">
+                    <div class="card-body text-center">
+                        <div class="h1 mb-3">
+                            <i class="bi bi-person-square"></i>
+                        </div>
+                        <h3 class="card-title mb-3">How to Play</h3>
+                        <p class="card-text">
+                            
+
+                        </p>
+                            <button class="btn btn-dark mt-2 btn-lg" data-bs-toggle="modal" data-bs-target="#rulesModal">Read Rules</button>
+                    </div>
+                </div>
+            </div>
+          <!--Format Box-->
+            <div class="col-md">
+                <div class="card bg-secondary text-light">
+                    <div class="card-body text-center">
+                        <div class="h1 mb-3">
+                            <i class="bi bi-people"></i>
+                        </div>
+                        <h3 class="card-title mb-3">The Format</h3>
+                        <p class="card-text">
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                        Iure, quas quidem possimus dolorum esse eligendi?
+                        </p>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Learn Sections  -->
+    <section id="learn" class="p-5 bg-dark text-light">
+        <div class="container">
+
+            <div class="row align-items-center ">
+                <div class="col-md"></div>
+                 <div class="col-md p-5">
+                <h2>Learn How to Play With Others</h2>
+                <p class="lead">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                    Similique deleniti possimus magnam corporis ratione facere!
+                </p>
+            </div>
+            </div>
+
+            <div class="row align-items-center">
+                <div class="col-md p-5">
+                    <h2>Learn How to Make Funny Prompts</h2>
+                    <p class="lead">
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                        Similique deleniti possimus magnam corporis ratione facere!
+                    </p>
+                </div>
+            <div class="col-md">
+            </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Question Accordion -->
+    <section id="Questions" class="p-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Frequently Asked Questions</h2>
+            <div class="accordion accordion-flush" data-bs-parent="#questions" id="questions">
+            <!-- Item 1 -->
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#question-one">How many players can join?</button>
+                </h2>
+                <div
+                id="question-one"
+                class="accordion-collapse collapse"
+                data-bs-parent="#questions"
+                >
+                <div class="accordion-body">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam
+                    beatae fuga animi distinctio perspiciatis adipisci velit maiores
+                    totam tempora accusamus modi explicabo accusantium consequatur,
+                    praesentium rem quisquam molestias at quos vero. Officiis ad
+                    velit doloremque at. Dignissimos praesentium necessitatibus
+                    natus corrupti cum consequatur aliquam! Minima molestias iure
+                    quam distinctio velit.
+                </div>
+                </div>
+            </div>
+            <!-- Item 2 -->
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#question-two">Do I need a phone to play?</button>
+                </h2>
+                <div
+                id="question-two"
+                class="accordion-collapse collapse"
+                data-bs-parent="#questions"
+                >
+                <div class="accordion-body">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam
+                    beatae fuga animi distinctio perspiciatis adipisci velit maiores
+                    totam tempora accusamus modi explicabo accusantium consequatur,
+                    praesentium rem quisquam molestias at quos vero. Officiis ad
+                    velit doloremque at. Dignissimos praesentium necessitatibus
+                    natus corrupti cum consequatur aliquam! Minima molestias iure
+                    quam distinctio velit.
+                </div>
+                </div>
+            </div>
+            <!-- Item 3 -->
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#question-three">Can I play alone or does it require a group?</button>
+                </h2>
+                <div
+                id="question-three"
+                class="accordion-collapse collapse"
+                data-bs-parent="#questions"
+                >
+                <div class="accordion-body">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam
+                    beatae fuga animi distinctio perspiciatis adipisci velit maiores
+                    totam tempora accusamus modi explicabo accusantium consequatur,
+                    praesentium rem quisquam molestias at quos vero. Officiis ad
+                    velit doloremque at. Dignissimos praesentium necessitatibus
+                    natus corrupti cum consequatur aliquam! Minima molestias iure
+                    quam distinctio velit.
+                </div>
+                </div>
+            </div>
+            <!-- Item 4 -->
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                <button class="accordion-button collapsed"type="button"data-bs-toggle="collapse" data-bs-target="#question-four">What happens if someone doesn’t answer in time?</button>
+                </h2>
+                <div
+                id="question-four"
+                class="accordion-collapse collapse"
+                data-bs-parent="#questions"
+                >
+                <div class="accordion-body">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam
+                    beatae fuga animi distinctio perspiciatis adipisci velit maiores
+                    totam tempora accusamus modi explicabo accusantium consequatur,
+                    praesentium rem quisquam molestias at quos vero. Officiis ad
+                    velit doloremque at. Dignissimos praesentium necessitatibus
+                    natus corrupti cum consequatur aliquam! Minima molestias iure
+                    quam distinctio velit.
+                </div>
+                </div>
+            </div>
+            <!-- Item 5 -->
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#question-five">How long is one round or game?</button>
+                </h2>
+                <div
+                id="question-five"
+                class="accordion-collapse collapse"
+                data-bs-parent="#questions"
+                >
+                <div class="accordion-body">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam
+                    beatae fuga animi distinctio perspiciatis adipisci velit maiores
+                    totam tempora accusamus modi explicabo accusantium consequatur,
+                    praesentium rem quisquam molestias at quos vero. Officiis ad
+                    velit doloremque at. Dignissimos praesentium necessitatibus
+                    natus corrupti cum consequatur aliquam! Minima molestias iure
+                    quam distinctio velit.
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    <!--Meet the team-->
+    <section id="instructors" class="p-5 bg-primary">
+        <div class="container">
+            <h2 class="text-center text-white">Meet the Team</h2>
+            <p class="lead text-center text-white mb-5">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Itaque, qui?
+            </p>
+            <div class="row g-5">
+            <div class="col-md-6 col-lg-4">
+                <div class="card bg-light">
+                <div class="card-body text-center">
+                    <img
+                    src="https://randomuser.me/api/portraits/men/11.jpg"
+                    class="rounded-circle mb-3"
+                    alt=""
+                    />
+                    <h3 class="card-title mb-3">Isaac Robinson</h3>
+                    <p class="card-text">
+                    Did the backend etc...
+                    </p>
+                </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="card bg-light">
+                <div class="card-body text-center">
+                    <img
+                    src="https://randomuser.me/api/portraits/women/11.jpg"
+                    class="rounded-circle mb-3"
+                    alt=""
+                    />
+                    <h3 class="card-title mb-3">Ethan Roth</h3>
+                    <p class="card-text">
+                    Helped with backend etc...
+                    </p>
+                </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="card bg-light">
+                <div class="card-body text-center">
+                    <img
+                    src="https://randomuser.me/api/portraits/men/12.jpg"
+                    class="rounded-circle mb-3"
+                    alt=""
+                    />
+                    <h3 class="card-title mb-3">Landon Schaefer</h3>
+                    <p class="card-text">
+                    Did the frontend etc...
+                    </p>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </section>
+
+        <!-- Contact info -->
+        <section class="p-5">
+        <div class="container">
+            <div class="row g-4">
+            <div class="col-md">
+                <h2 class="text-center mb-4">Contact Info</h2>
+                <ul class="list-group list-group-flush lead">
+                <li class="list-group-item">
+                    <span class="fw-bold">Main Location:</span> Carlmont HS
+                </li>
+                <li class="list-group-item">
+                    <span class="fw-bold">School Phone:</span> (650) 595-0210
+                </li>
+                <li class="list-group-item">
+                        <span class="fw-bold">Team Phone:</span> (650)-483-6076
+                    </li>
+                <li class="list-group-item">
+                    <span class="fw-bold">Student Email:</span> 817056@seq.org
+                </li>
+                </ul>
+            </div>
+            
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="p-5 bg-dark text-white text-center position-relative"></footer>
+
+<!-- Modal for reading rules -->
+    <div class="modal fade" id="rulesModal" tabindex="-1" aria-labelledby="rulesModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-dark">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="rulesModalLabel">Game Rules</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+            <div class="modal-body">
+                <p>
+                    Submit your funniest answers to the prompts. Vote on the best ones. The most votes wins. Simple and hilarious.
+                </p>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap latest version-->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Makes text go away when they press submit-->
+    <script>
+        document.getElementById("submitAnswer").addEventListener("click", function () {
+        document.getElementById("input").value = ""; // clears the correct input
+        });
+    </script>
+
+
+    </body>
+  </html>
