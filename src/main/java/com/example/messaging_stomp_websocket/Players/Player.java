@@ -4,13 +4,15 @@ public class Player {
 
   private String name;
   private int points;
+  private int pid;
 
   public Player() {
   }
 
-  public Player(String name) {
+  public Player(String name, int pid) {
     this.name = name;
     this.points = 0;
+    this.pid = pid;
   }
 
   public String getName() {
@@ -23,5 +25,9 @@ public class Player {
 
   public int getPoints() {
     return points;
+  }
+
+  public int getPID() {
+    return pid;
   }
 }

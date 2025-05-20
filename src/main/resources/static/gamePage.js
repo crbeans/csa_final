@@ -1,4 +1,9 @@
-import { connect, getIsConnected, publishMsg } from "./stompClient.js";
+import {
+  connect,
+  getIsConnected,
+  publishMsg,
+  subscribeTo,
+} from "./stompClient.js";
 
 let playerName = "";
 
@@ -8,6 +13,20 @@ function onSubmitAnswer() {
     answer: $("#answer").val(),
     submitter: playerName,
   });
+}
+
+function setGameStart(val) {
+  if (val) {
+    $("#statusText").text("Game Started.");
+  }
+}
+
+function onMain(msg) {
+  const message = JSON.parse(msg.body).content;
+  console.log(message);
+  if (message == "gamestart") {
+    setGameStart(true);
+  }
 }
 
 $(function () {
@@ -22,7 +41,10 @@ $(function () {
       } else {
         // publishMsg("/app/join", { name: "Player" });
         window.location.href = "/?error=NAME_INVALID";
+        return;
       }
+
+      subscribeTo("/topic/main", (msg) => onMain(msg));
     });
   }
 

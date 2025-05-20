@@ -21,7 +21,7 @@
     <div class="container">
         <!--Heading-->
         <div class="text-center">
-            <h1>Hello! Ready to Play?</h1>
+            <h1 id="statusText">Waiting for game to start</h1>
         </div>
 
         <!--Prompts and 2 Button sections-->
@@ -33,7 +33,7 @@
         
 
         <!--Input for the answer-->
-        <form class="d-flex flex-row">
+        <form class="d-flex flex-row" id="answerForm">
             <div class=" flex-grow-1">
                 <div class="form-floating">
                 <input type="input" id="answer" class="form-control" placeholder="Enter" required></input>
