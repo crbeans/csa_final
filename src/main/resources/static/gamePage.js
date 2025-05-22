@@ -6,27 +6,28 @@ import {
 } from "./stompClient.js";
 
 let playerName = "";
+let mainSub, joinedSub, userSub;
 
 function onSubmitAnswer() {
-  console.log($("#answer").val());
   publishMsg("/app/submit", {
     answer: $("#answer").val(),
     submitter: playerName,
   });
 }
 
-function setGameStart(val) {
-  if (val) {
-    $("#statusText").text("Game Started.");
-  }
+function startGame() {
+  $("#statusText").text("Game Started.");
 }
 
 function onMain(msg) {
   const message = JSON.parse(msg.body).content;
-  console.log(message);
   if (message == "gamestart") {
-    setGameStart(true);
+    startGame();
   }
+}
+
+function onUserMain(msg) {
+  console.log(msg);
 }
 
 $(function () {
@@ -43,8 +44,8 @@ $(function () {
         window.location.href = "/?error=NAME_INVALID";
         return;
       }
-
-      subscribeTo("/topic/main", (msg) => onMain(msg));
+      userSub = subscribeTo("/user/topic/main", (msg) => onUserMain(msg));
+      mainSub = subscribeTo("/topic/main", (msg) => onMain(msg));
     });
   }
 

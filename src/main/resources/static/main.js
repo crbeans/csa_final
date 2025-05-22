@@ -10,18 +10,22 @@ function setConnected(val) {
   }
 }
 
-function onMainMessage(msg) {}
+function startGame() {}
+
+function onMainMessage(msg) {
+  const content = JSON.parse(msg.body).content;
+  const data = JSON.parse(msg.body).data;
+  if (content == "gamestart") {
+    $("#statusText").text("Game Started");
+  }
+}
 
 function onPlayerJoin(msg) {
   players++;
   $("#playersList").append(
     '<tr><td class="text-center">' + JSON.parse(msg.body).content + "</td></tr>"
   );
-  $("#playersListTableHeader").val(
-    '<th scope="col" class="text-center" id="playersListTableHeader">Players - (' +
-      players +
-      " connected)</th>"
-  );
+  $("#playersListTableHeader").text("Players - " + players);
 }
 
 let mainSub, joinedSub;
@@ -34,5 +38,6 @@ function onConnect() {
 }
 
 $(function () {
+  onConnect();
   $("#connect").click(() => onConnect());
 });

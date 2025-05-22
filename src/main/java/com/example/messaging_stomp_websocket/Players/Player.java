@@ -1,5 +1,7 @@
 package com.example.messaging_stomp_websocket.Players;
 
+import org.json.simple.JSONObject;
+
 public class Player {
 
   private String name;
@@ -29,5 +31,13 @@ public class Player {
 
   public int getPID() {
     return pid;
+  }
+
+  public JSONObject toJSON() {
+    JSONObject json = new JSONObject();
+    json.put("name", name);
+    json.put("points", points);
+    json.put("pid", pid);
+    return json;
   }
 }
