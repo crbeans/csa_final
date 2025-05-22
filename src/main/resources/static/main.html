@@ -1,5 +1,4 @@
-<!--MAIN SCREEN EVERYONE SEES-->
-
+<!--MAIN TV SCREEN VOTING-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,7 +40,7 @@
       margin: 1rem;
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
       width: 100%;
-      max-width: 600px;
+      max-width: 800px;
     }
 
     .option-header {
@@ -55,29 +54,37 @@
       font-size: 1.2rem;
       color: #ffc107;
     }
+    /* makes the text bigger */
+    .vote-box p {
+        font-size: 2rem; 
+        font-weight: bold;
+    }
   </style>
 </head>
 
 <body>
   <h1 class="mb-5">[Game Name] - Answers & Results</h1>
-
   <div class="answer-box">
-    <div class="option-header">Option 1</div>
-    <p class="lead">A squirrel DJing on a tomato</p>
-    <div class="vote-count">Votes: 3</div>
+    <div class="vote-box">
+      <div class="option-header">Option 1</div>
+      <p class="lead">A squirrel DJing on a tomato</p>
+      <div class="vote-count">Votes: 3</div>
+    </div>
   </div>
 
   <div class="answer-box">
-    <div class="option-header">Option 2</div>
-    <p class="lead">Leftover thoughts from the last tenant</p>
-    <div class="vote-count">Votes: 5</div>
+    <div class="vote-box">
+      <div class="option-header">Option 2</div>
+        <p class="lead">Leftover thoughts from the last tenant Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem minima sed beatae suscipit, vero eaque ducimus quisquam magnam magni atque?</p>
+      <div class="vote-count">Votes: 5</div>
+    </div>
   </div>
 
 
 <!-- Leaderboard -->
-  <!-- Leaderboard -->
-  <div class="leaderboard-container">
-    <h2>Leaderboard</h2>
+  <div class="leaderboard-container" style="position: fixed; top: 20px; right: 20px; width: 300px; z-index: 1000;">
+    <div class="position-top-right" style="background-color: #1e1e1e; padding: 15px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);">
+    <h2 style="margin-top: 0; color: #fff;">Leaderboard</h2>
     <table class="table table-striped table-dark">
       <thead>
         <tr>
@@ -104,10 +111,17 @@
         </tr>
         <tr>
           <th scope="row">4</th>
-          <td>Morgan</td>
-          <td>5 pts</td>
+          <td>Landon</td>
+          <td>6 pts</td>
         </tr>
+        <tr>
+          <th scope="row">5</th>
+          <td>Isaac</td>
+          <td>3 pts</td>
+        </tr>
+        
       </tbody>
     </table>
+  </div>
   </div>
 </html>

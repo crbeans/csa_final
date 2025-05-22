@@ -1,3 +1,4 @@
+<!--TYPE IN PROMPT SCREEN-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -72,8 +73,9 @@
 </head>
 
 <body>
-    <div class="container py-5 text-center">
+    <div class="container py-5 text-center text-light">
         <h1 id="gameTitle" class="mb-5">[Game Name] - Enter Your Funniest Answer!</h1>
+        <h3 id="gameChosen" class="mb-5">You have been chosen</h3>
 
     <!-- Prompt Answer Section -->
     <div id="answerSection">
@@ -81,12 +83,13 @@
             <h4 id="prompt">What's the weirdest thing to find in your fridge?</h4>
             <input type="text" id="playerAnswer" class="form-control form-control-lg mt-3" placeholder="Enter Answer" required>
             <button class="btn btn-primary mt-4 btn-lg" type="button" onClick="submitAnswer()">Submit Answer</button>
-        </div>
+        </div> 
     </div>
 
     <!-- Voting Section -->
     <div id="votingSection" class="hidden">
         <h1 class="mb-4">Vote for the Best Answer!</h1>
+        <h3 class="mb-4">Look at the TV to see the options</h3>
         <div class="row">
             <div class="col-md-6">
                 <div class="vote-box" onclick="vote(1)">
@@ -100,7 +103,7 @@
             </div>
         </div>
         <div id="voted-message" class="mt-4 hidden">
-            <h3>Thanks for voting!</h3>
+            <h3>Thanks for voting! Waiting for responses</h3>
         </div>
     </div>
 </div>
@@ -108,10 +111,10 @@
     <script>
         function submitAnswer() {
             const answer = document.getElementById("playerAnswer").value;
-            
         document.getElementById("answerSection").classList.add("hidden");
         document.getElementById("votingSection").classList.remove("hidden");
         document.getElementById("gameTitle").classList.add("hidden");
+        document.getElementById("gameChosen").classList.add("hidden");
     }
 
     function vote(option) {
