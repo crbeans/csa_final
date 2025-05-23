@@ -11,12 +11,12 @@ function setConnected(val) {
 function onClick() {
   connect().then(() => {
     setConnected(true);
-    subscribeTo("/topic/joined", (message) => {
+    subscribeTo("/topic/joined", (msg) => {
       $("#players").append(
         "<tr><td>" +
-          JSON.parse(message.body).content +
+          JSON.parse(msg.body).content +
           '<button class="btn btn-danger kick-player" data-player="' +
-          JSON.parse(message.body).data +
+          JSON.parse(msg.body).data +
           '">Kick Player</button></td></tr>'
       );
     });
@@ -39,6 +39,7 @@ function startGame() {
 }
 
 $(function () {
+  onClick();
   $("#connect").click(() => onClick());
   $("#startGame").click(() => startGame());
   $("#players").on("click", ".kick-player", function () {
