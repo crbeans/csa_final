@@ -9,6 +9,9 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
+import com.example.messaging_stomp_websocket.Players.Player;
+import com.example.messaging_stomp_websocket.Players.PlayerController;
+
 @Controller
 public class GameController {
 

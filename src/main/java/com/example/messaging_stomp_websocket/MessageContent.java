@@ -11,10 +11,16 @@ public class MessageContent {
   public MessageContent(String content) {
     this.content = content;
   }
+
   public MessageContent(String content, String data) {
     this.content = content;
     this.data = data;
   }
+
+  public String getContent() {
+    return content;
+  }
+
   public String getData() {
     return data;
   }
