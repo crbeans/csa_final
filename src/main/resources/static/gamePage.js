@@ -27,7 +27,16 @@ function onMain(msg) {
 }
 
 function onUserMain(msg) {
-  console.log(msg);
+  const message = JSON.parse(msg.body);
+  if (message.content == "answerprompt") {
+    $("#statusSection").addClass("hidden");
+    $("#answerSection").removeClass("hidden");
+    $("#prompt").text(message.data);
+  } else if (message.content == "voting") {
+    $("#statusSection").addClass("hidden");
+    $("#votingSection").removeClass("hidden");
+    $("#statusText").text("Waiting for responses to be submitted");
+  }
 }
 
 $(function () {
@@ -39,6 +48,7 @@ $(function () {
       if (params.has("playerName")) {
         playerName = params.get("playerName");
         publishMsg("/app/join", { name: params.get("playerName") });
+        $("#playerName").text("You are: " + playerName);
       } else {
         // publishMsg("/app/join", { name: "Player" });
         window.location.href = "/?error=NAME_INVALID";
