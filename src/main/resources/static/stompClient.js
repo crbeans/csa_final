@@ -94,7 +94,7 @@ export function publishMsg(destination, values) {
 }
 
 export function subscribeTo(endpoint, callback) {
-  stompClient.subscribe(endpoint, callback);
+  return stompClient.subscribe(endpoint, callback);
 }
 
 function showGreeting(message) {

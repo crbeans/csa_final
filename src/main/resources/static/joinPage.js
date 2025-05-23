@@ -1,7 +1,6 @@
 import { connect, setIsConnected } from "./stompClient.js";
 
 function onJoin() {
-  console.log("join bu");
   connect();
   setIsConnected(true);
   window.location.href = "/game.html?playerName=" + $("#input").val();
@@ -21,4 +20,3 @@ $(function () {
     });
   });
 });
-
