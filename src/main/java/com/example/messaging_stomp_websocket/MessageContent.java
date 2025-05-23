@@ -15,13 +15,7 @@ public class MessageContent {
     this.content = content;
     this.data = data;
   }
-
-  public String getContent() {
-    return content;
-  }
-
   public String getData() {
     return data;
   }
-
 }
