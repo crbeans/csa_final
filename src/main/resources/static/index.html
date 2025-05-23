@@ -49,7 +49,7 @@
         <div class="container">
             <div class="d-sm-flex align-items-center justify-content-between">
                 <div>
-                    <h1>Welcome to <span class="text-warning"> [Game] </span></h1>
+                    <h1>Welcome to <span class="text-warning"> Answer Antics </span></h1>
                     <p class="lead my-4">
                     Play with your friends and have a good time! Read the rules if you are confused
                     </p>
@@ -58,24 +58,32 @@
         </div>
     </section>
 
-    <!-- Enter Username 
-     Fix the id on it to point to isaac backend-->
+    <!-- Enter Username -->
+    <!-- Enter Username -->
     <section class="bg-primary text-light p-5">
         <div class="container">
-            <div class="d-md-flex justify-content-between align-items-center">
-                    <h3 class="mb-3 mb-md-0">Enter Your Username!</h3>
-                    <form class="d-flex flex-grow-1 p-5">
-                        <div class="form-floating flex-grow-1">
-                            <div class="form-floating">
-                            <input type="text" id="input" class="form-control" placeholder="Enter"></input>
-                            <label for="input">Enter Username</label>
-                            </div>
-                        </div>
-                        <button class="btn btn-dark btn-lg mx-2" id="joinButton" type="submit">Submit</button>
-                    </form>
+            <div class="d-md-flex justify-content-between align-items-center" id="usernameSection"> <!-- <-- wrap with id -->
+                <h3 class="mb-3 mb-md-0">Enter Your Username!</h3>
+                <form class="d-flex flex-grow-1 p-5">
+                    <div class="form-floating flex-grow-1">
+                        <input type="text" id="input" class="form-control" placeholder="Enter" />
+                        <label for="input">Enter Username</label>
+                    </div>
+                    <button class="btn btn-dark btn-lg mx-2" id="submitAnswer" type="submit">Submit</button>
+                </form>
+            </div>
+
+            <!-- Waiting screen -->
+            <div class="text-center" id="waitingScreen" hidden>
+                <div class="spinner-border text-warning mb-4" style="width: 4rem; height: 4rem;" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <h1 class="display-4">Waiting for other players...</h1>
+                <p class="lead">Get ready — the game will start soon!</p>
             </div>
         </div>
     </section>
+
 
     <!-- Boxes -->
      <!--Expect Box-->
@@ -120,8 +128,7 @@
                         </div>
                         <h3 class="card-title mb-3">The Format</h3>
                         <p class="card-text">
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                        Iure, quas quidem possimus dolorum esse eligendi?
+                        Enter your username. The game will choose 8 people to answer a random question. The other players will vote to see which is the best response. Winner gets points.
                         </p>
                     </div>
                 </div>
@@ -317,7 +324,7 @@
                 </div>
             <div class="modal-body">
                 <p>
-                    Submit your funniest answers to the prompts. Vote on the best ones. The most votes wins. Simple and hilarious.
+                    Enter your username. The game will choose 8 players to submit their response to the question. Afterwards, the other players will vote to see which response was the funniest.
                 </p>
             </div>
             </div>
@@ -331,13 +338,28 @@
       crossorigin="anonymous"
     ></script>
 
-    <!-- Makes text go away when they press submit-->
+    <!-- Makes waiting screen pop up-->
     <script>
-        document.getElementById("submitAnswer").addEventListener("click", function () {
-        document.getElementById("input").value = ""; // clears the correct input
-        });
+    document.querySelector("form").addEventListener("submit", function (event) {
+    event.preventDefault();
+    const inputField = document.getElementById("input");
+    const username = inputField.value.trim();
+    if (username !== "") {
+      console.log("Username submitted:", username);
+      // Show waiting screen
+      document.getElementById("waitingScreen").hidden = false;
+    } 
+    else{
+      alert("Please enter a username.");
+    }
+    //Timer to move on to next screen
+    //setTimeout(() => {
+    /*  window.location.href = 'game.html';  // Change to your next page URL
+    }, 10000); // 20000 ms = 20 second
+    */
+    });
     </script>
 
-
     </body>
-  </html>
+</body>
+</html>
