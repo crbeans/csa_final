@@ -109,7 +109,7 @@
           <button
             class="btn btn-primary mt-4 btn-lg"
             type="button"
-            onClick="submitAnswer()"
+            id="submitAnswer"
           >
             Submit Answer
           </button>
@@ -122,12 +122,24 @@
         <div class="row">
           <div class="col-md-6">
             <div class="vote-box" onclick="vote(1)">
-              <p id="answer1">Option 1</p>
+              <p id="answer" data-option="1">Option 1</p>
             </div>
           </div>
           <div class="col-md-6">
             <div class="vote-box" onclick="vote(2)">
-              <p id="answer2">Option 2</p>
+              <p id="answer" data-option="2">Option 2</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="vote-box" onclick="vote(1)">
+              <p id="answer" data-option="3">Option 3</p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="vote-box" onclick="vote(2)">
+              <p id="answer" data-option="4">Option 4</p>
             </div>
           </div>
         </div>
@@ -137,7 +149,7 @@
       </div>
     </div>
     <!--Answer submission and voting by toggling section visibility and disabling repeat votes-->
-    <script>
+    <!-- <script>
       function submitAnswer() {
         const answer = document.getElementById("playerAnswer").value;
 
@@ -151,6 +163,6 @@
         document.getElementById("answer2").parentNode.classList.add("disabled");
         document.getElementById("voted-message").classList.remove("hidden");
       }
-    </script>
+    </script> -->
   </body>
 </html>
