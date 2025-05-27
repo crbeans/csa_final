@@ -2,7 +2,7 @@ const stompClient = new StompJs.Client({
   brokerURL: `${
     window.location.protocol == "https:"
       ? "wss://csa-final-project.onrender.com/ws"
-      : "ws://localhost:8080/ws"
+      : `ws://${window.location.host}/ws`
   }`,
 });
 
