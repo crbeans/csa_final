@@ -28,12 +28,15 @@ function onPlayerJoin(msg) {
   $("#playersListTableHeader").text("Players - " + players);
 }
 
-let mainSub, joinedSub;
+function onVoting(msg) {}
+
+let mainSub, joinedSub, votingSub;
 function onConnect() {
   connect().then(() => {
     setConnected(true);
     mainSub = subscribeTo("/topic/main", (msg) => onMainMessage(msg));
     joinedSub = subscribeTo("/topic/joined", (msg) => onPlayerJoin(msg));
+    votingSub = subscribeTo("/topic/voting", (msg) => onVoting(msg));
   });
 }
 

@@ -135,7 +135,7 @@ public class GameController {
         if (recievedAnswers == PLAYERS_PER_ROUND) {
             // ArrayList<Answer> answers = AnswerController.getAnswerList();
             for (Player player : votersList) {
-                List<String> justAnswers = answerList.subList(0, 2).stream()
+                List<String> justAnswers = answerList.stream()
                         .map(Answer::getAnswer)
                         .collect(Collectors.toList());
                 simpMessagingTemplate.convertAndSendToUser(Integer.toString(player.getPID()), "/topic/main",
@@ -152,7 +152,7 @@ public class GameController {
         votes++;
         int option = vote.getOption();
         voteList[option - 1]++;
-        System.out.println(voteList.toString());
+        System.out.println(Arrays.toString(voteList));
 
         JSONObject json = new JSONObject();
         json.put("voter", vote.getSubmitter());
@@ -161,6 +161,18 @@ public class GameController {
         simpMessagingTemplate.convertAndSend("/topic/voting", new MessageContent("vote", json.toJSONString()));
         if (votes == votersList.size()) {
             simpMessagingTemplate.convertAndSend("/topic/voting", new MessageContent("votingend"));
+            onVotingComplete();
         }
+    }
+
+    public void onVotingComplete() throws Exception {
+        int winner = 0;
+        for (int i = 0; i < voteList.length; i++) {
+            if (voteList[i] > winner) {
+                winner = i;
+            }
+        }
+        System.out.println(
+                answerList.get(winner).getSubmitter() + " won! They said " + answerList.get(winner).getAnswer());
     }
 }

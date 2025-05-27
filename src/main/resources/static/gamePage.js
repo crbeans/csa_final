@@ -42,7 +42,7 @@ function onUserMain(msg) {
     $("#votingSection").removeClass("hidden");
     // $("#answer1").text(data[0]);
     // $("#answer2").text(data[1]);
-    $("#answer").each(function () {
+    $(".answer-button").each(function () {
       const option = parseInt($(this).data("option"));
       $(this).text(data[option - 1]);
     });
@@ -55,7 +55,7 @@ function onVote(option) {
     submitter: playerName,
   });
   $("#votingSection").addClass("hidden");
-  $("statusSection").removeClass("hidden");
+  $("#statusSection").removeClass("hidden");
   $("#statusText").text("Vote submitted!");
 }
 
@@ -80,8 +80,9 @@ $(function () {
   }
 
   $("#submitAnswer").click(() => onSubmitAnswer());
-  $("#answer").click(function () {
-    const option = $(this).data("option");
+  $(".vote-box").click(function () {
+    const answer = $(this).find(".answer-button");
+    const option = answer.data("option");
     onVote(option);
   });
 });
