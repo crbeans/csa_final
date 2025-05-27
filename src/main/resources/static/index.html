@@ -1,3 +1,4 @@
+<!--HOME SCREEN-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,6 +16,17 @@
     <script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@7.0.0/bundles/stomp.umd.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script type="module" src="joinPage.js"></script>
+    <style>
+    /* makes the text bigger */
+    .vote-box button {
+        font-size: 2rem; 
+        font-weight: bold;
+    }
+    .vote-box p {
+        font-size: 2rem; 
+        font-weight: normal;
+    }
+    </style>
 </head>
 
 <body>
@@ -26,31 +38,22 @@
         <div class="collapse navbar-collapse" id="navmenu">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                <a href="#learn" class="nav-link">What You'll Learn</a>
-                </li>
-                <li class="nav-item">
                 <a href="#questions" class="nav-link">Questions</a>
                 </li>
                 <li class="nav-item">
                 <a href="#instructors" class="nav-link">Instructors</a>
                 </li>
             </ul>
-
-
-                    <a href="game.html"><button class="btn btn-secondary">game.html</button></a>
-                    <a href="main.html"><button class="btn btn-secondary">main.html</button></a>
-
-
         </div>
     </div>
-    </nav>
+    </nav> 
 
     <!-- Showcase -->
     <section class="bg-dark text-light p-5 p-lg-0 pt-lg-5 text-center text-sm-start">
         <div class="container">
-            <div class="d-sm-flex align-items-center justify-content-between">
+            <div class="d-sm-flex align-items-center justify-content-between p-4">
                 <div>
-                    <h1>Welcome to <span class="text-warning"> [Game] </span></h1>
+                    <h1>Welcome to <span class="text-warning"> Answer Antics </span></h1>
                     <p class="lead my-4">
                     Play with your friends and have a good time! Read the rules if you are confused
                     </p>
@@ -59,24 +62,32 @@
         </div>
     </section>
 
-    <!-- Enter Username 
-     Fix the id on it to point to isaac backend-->
+    <!-- Enter Username -->
+    <!-- Enter Username -->
     <section class="bg-primary text-light p-5">
         <div class="container">
-            <div class="d-md-flex justify-content-between align-items-center">
+            <div class="d-md-flex justify-content-between align-items-center" id="usernameSection"> <!-- <-- wrap with id -->
                 <h3 class="mb-3 mb-md-0">Enter Your Username!</h3>
                 <form class="d-flex flex-grow-1 p-5">
                     <div class="form-floating flex-grow-1">
-                        <div class="form-floating">
-                        <input type="text" id="input" class="form-control" placeholder="Enter"></input>
+                        <input type="text" id="input" class="form-control" placeholder="Enter" />
                         <label for="input">Enter Username</label>
-                        </div>
                     </div>
                     <button class="btn btn-dark btn-lg mx-2" id="joinButton" type="submit">Submit</button>
                 </form>
             </div>
+
+            <!-- Waiting screen -->
+            <div class="text-center" id="waitingScreen" hidden>
+                <div class="spinner-border text-warning mb-4" style="width: 4rem; height: 4rem;" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <h1 class="display-4">Waiting for other players...</h1>
+                <p class="lead">Get ready — the game will start soon!</p>
+            </div>
         </div>
     </section>
+
 
     <!-- Boxes -->
      <!--Expect Box-->
@@ -105,11 +116,10 @@
                             <i class="bi bi-person-square"></i>
                         </div>
                         <h3 class="card-title mb-3">How to Play</h3>
-                        <p class="card-text">
-                            
-
-                        </p>
-                            <button class="btn btn-dark mt-2 btn-lg" data-bs-toggle="modal" data-bs-target="#rulesModal">Read Rules</button>
+                        <p class="card-text"></p>
+                        <div class="vote-box">
+                            <button class="btn btn-primary mt-2 btn-lg"  data-bs-toggle="modal" data-bs-target="#rulesModal">Read Rules</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -122,8 +132,7 @@
                         </div>
                         <h3 class="card-title mb-3">The Format</h3>
                         <p class="card-text">
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                        Iure, quas quidem possimus dolorum esse eligendi?
+                        Enter your username. The game will choose 8 people to answer a random question. The other players will vote to see which is the best response. Winner gets points.
                         </p>
                     </div>
                 </div>
@@ -132,34 +141,12 @@
         </div>
     </section>
 
-    <!-- Learn Sections  -->
-    <section id="learn" class="p-5 bg-dark text-light">
-        <div class="container">
+    <footer class="p-5 bg-dark text-white text-center position-relative"></footer>
+    <footer class="p-5 bg-dark text-white text-center position-relative"></footer>
 
-            <div class="row align-items-center ">
-                <div class="col-md"></div>
-                 <div class="col-md p-5">
-                <h2>Learn How to Play With Others</h2>
-                <p class="lead">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                    Similique deleniti possimus magnam corporis ratione facere!
-                </p>
-            </div>
-            </div>
 
-            <div class="row align-items-center">
-                <div class="col-md p-5">
-                    <h2>Learn How to Make Funny Prompts</h2>
-                    <p class="lead">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                        Similique deleniti possimus magnam corporis ratione facere!
-                    </p>
-                </div>
-            <div class="col-md">
-            </div>
-            </div>
-        </div>
-    </section>
+
+    
 
     <!-- Question Accordion -->
     <section id="Questions" class="p-5">
@@ -176,14 +163,8 @@
                 class="accordion-collapse collapse"
                 data-bs-parent="#questions"
                 >
-                <div class="accordion-body">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam
-                    beatae fuga animi distinctio perspiciatis adipisci velit maiores
-                    totam tempora accusamus modi explicabo accusantium consequatur,
-                    praesentium rem quisquam molestias at quos vero. Officiis ad
-                    velit doloremque at. Dignissimos praesentium necessitatibus
-                    natus corrupti cum consequatur aliquam! Minima molestias iure
-                    quam distinctio velit.
+                <div class="accordion-body mx-4">
+                    As many as you want
                 </div>
                 </div>
             </div>
@@ -197,14 +178,8 @@
                 class="accordion-collapse collapse"
                 data-bs-parent="#questions"
                 >
-                <div class="accordion-body">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam
-                    beatae fuga animi distinctio perspiciatis adipisci velit maiores
-                    totam tempora accusamus modi explicabo accusantium consequatur,
-                    praesentium rem quisquam molestias at quos vero. Officiis ad
-                    velit doloremque at. Dignissimos praesentium necessitatibus
-                    natus corrupti cum consequatur aliquam! Minima molestias iure
-                    quam distinctio velit.
+                <div class="accordion-body mx-4">
+                    You can play on any type of device
                 </div>
                 </div>
             </div>
@@ -218,14 +193,8 @@
                 class="accordion-collapse collapse"
                 data-bs-parent="#questions"
                 >
-                <div class="accordion-body">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam
-                    beatae fuga animi distinctio perspiciatis adipisci velit maiores
-                    totam tempora accusamus modi explicabo accusantium consequatur,
-                    praesentium rem quisquam molestias at quos vero. Officiis ad
-                    velit doloremque at. Dignissimos praesentium necessitatibus
-                    natus corrupti cum consequatur aliquam! Minima molestias iure
-                    quam distinctio velit.
+                <div class="accordion-body mx-4">
+                    Only works if you are in a group
                 </div>
                 </div>
             </div>
@@ -239,14 +208,8 @@
                 class="accordion-collapse collapse"
                 data-bs-parent="#questions"
                 >
-                <div class="accordion-body">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam
-                    beatae fuga animi distinctio perspiciatis adipisci velit maiores
-                    totam tempora accusamus modi explicabo accusantium consequatur,
-                    praesentium rem quisquam molestias at quos vero. Officiis ad
-                    velit doloremque at. Dignissimos praesentium necessitatibus
-                    natus corrupti cum consequatur aliquam! Minima molestias iure
-                    quam distinctio velit.
+                <div class="accordion-body mx-4">
+                    Then no prompt is submitted
                 </div>
                 </div>
             </div>
@@ -260,14 +223,8 @@
                 class="accordion-collapse collapse"
                 data-bs-parent="#questions"
                 >
-                <div class="accordion-body">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam
-                    beatae fuga animi distinctio perspiciatis adipisci velit maiores
-                    totam tempora accusamus modi explicabo accusantium consequatur,
-                    praesentium rem quisquam molestias at quos vero. Officiis ad
-                    velit doloremque at. Dignissimos praesentium necessitatibus
-                    natus corrupti cum consequatur aliquam! Minima molestias iure
-                    quam distinctio velit.
+                <div class="accordion-body mx-4">
+                    Only a few minutes long 
                 </div>
                 </div>
             </div>
@@ -279,9 +236,7 @@
     <section id="instructors" class="p-5 bg-primary">
         <div class="container">
             <h2 class="text-center text-white">Meet the Team</h2>
-            <p class="lead text-center text-white mb-5">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Itaque, qui?
-            </p>
+            <p class="lead text-center text-white mb-5"></p>
             <div class="row g-5">
             <div class="col-md-6 col-lg-4">
                 <div class="card bg-light">
@@ -293,7 +248,7 @@
                     />
                     <h3 class="card-title mb-3">Isaac Robinson</h3>
                     <p class="card-text">
-                    Did the backend etc...
+                    Did the backend 
                     </p>
                 </div>
                 </div>
@@ -309,7 +264,7 @@
                     />
                     <h3 class="card-title mb-3">Ethan Roth</h3>
                     <p class="card-text">
-                    Helped with backend etc...
+                    Helped with backend and frontend 
                     </p>
                 </div>
                 </div>
@@ -325,7 +280,7 @@
                     />
                     <h3 class="card-title mb-3">Landon Schaefer</h3>
                     <p class="card-text">
-                    Did the frontend etc...
+                    Did the frontend
                     </p>
                 </div>
                 </div>
@@ -372,9 +327,11 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
             <div class="modal-body">
+                <div class="vote-box">
                 <p>
-                    Submit your funniest answers to the prompts. Vote on the best ones. The most votes wins. Simple and hilarious.
+                    Enter your username. The game will choose 8 players to submit their response to the question. Afterwards, the other players will vote to see which response was the funniest.
                 </p>
+                </div>
             </div>
             </div>
         </div>
@@ -387,13 +344,28 @@
       crossorigin="anonymous"
     ></script>
 
-    <!-- Makes text go away when they press submit-->
-    <!-- <script>
-        document.getElementById("submitAnswer").addEventListener("click", function () {
-        document.getElementById("input").value = ""; // clears the correct input
-        });
-    </script> -->
-
+    <!-- Makes waiting screen pop up-->
+    <script>
+    document.querySelector("form").addEventListener("submit", function (event) {
+    event.preventDefault();
+    const inputField = document.getElementById("input");
+    const username = inputField.value.trim();
+    if (username !== "") {
+      console.log("Username submitted:", username);
+      // Show waiting screen
+      document.getElementById("waitingScreen").hidden = false;
+    } 
+    else{
+      alert("Please enter a username.");
+    }
+    //Timer to move on to next screen
+    //setTimeout(() => {
+    /*  window.location.href = 'game.html';  // Change to your next page URL
+    }, 10000); // 20000 ms = 20 second
+    */
+    });
+    </script>
 
     </body>
-  </html>
+</body>
+</html>

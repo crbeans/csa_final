@@ -1,5 +1,4 @@
-<!--MAIN SCREEN EVERYONE SEES-->
-
+<!--MAIN TV SCREEN VOTING-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,8 +39,8 @@
       margin: 1rem;
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
       width: 100%;
-      max-width: 600px;
-    }
+      max-width: 800px;
+    } 
 
     .option-header {
       font-size: 1.5rem;
@@ -54,11 +53,16 @@
       font-size: 1.2rem;
       color: #ffc107;
     }
+    /* makes the text bigger */
+    .vote-box p {
+        font-size: 2rem; 
+        font-weight: bold;
+    }
   </style>
 </head>
 
 <body>
-  <h1 class="mb-2">[Game Name] - Answers & Results</h1>
+  <h1 class="mb-5"><span class="text-warning"> Answer Antics </span> - Answers & Results</h1>
 
   
   <div class="container">
@@ -133,10 +137,17 @@
         </tr>
         <tr>
           <th scope="row">4</th>
-          <td>Morgan</td>
-          <td>5 pts</td>
+          <td>Landon</td>
+          <td>6 pts</td>
         </tr>
+        <tr>
+          <th scope="row">5</th>
+          <td>Isaac</td>
+          <td>3 pts</td>
+        </tr>
+        
       </tbody>
     </table>
+  </div>
   </div>
 </html>
