@@ -14,9 +14,13 @@ function startGame() {}
 
 function startRound() {
   $(".answer-box").each(function () {
-    const p = $(this).find(".option-header");
+    const p = $(this).find(".font-weight-bold");
     p.addClass("d-none");
   });
+  $("#submitter").each(function () {
+    $(this).addClass("d-none");
+  });
+  $("#votingBoxes").addClass("d-none");
 }
 
 function onMainMessage(msg) {
@@ -40,22 +44,44 @@ function onVoting(msg) {
   const message = JSON.parse(msg.body);
   if (message.content == "votingend") {
     const data = JSON.parse(message.data);
+
+    let winner = 0;
+
+    for (let i = 1; i < data.length; i++) {
+      if (data[i] > data[winner]) {
+        winner = i;
+      }
+    }
+
     $(".answer-box").each(function () {
       const option = $(this).data("option");
-      const p = $(this).find("p");
-      $(this)
-        .find("p")
-        .text(`Votes: ${data[option - 1]}`);
-      $(this).find("p").removeClass("d-none");
+      // vote count
+      const p = $(this).find(".vote-count");
+      p.text(`Votes: ${data[option - 1]}`);
+      p.removeClass("d-none");
+
+      if (option - 1 == winner) {
+        $(this).addClass("bg-primary");
+      }
+
+      // submitter name
+      $(this).find("#submitter").text();
+      $(this).find("#submitter").removeClass("d-none");
     });
   } else if (message.content == "votingOn") {
     const data = JSON.parse(message.data);
+    $("#votingBoxes").removeClass("d-none");
     $(".answer-box").each(function () {
       const option = $(this).data("option");
-      const p = $(this).find(".option-header");
-      $(this)
-        .find(".option-header")
-        .text(`${data[option - 1]}`);
+      const p = $(this).find(".font-weight-bold");
+      p.text(`${data[option - 1]}`);
+    });
+  } else if (message.content == "votingOnSubmitters") {
+    const data = JSON.parse(message.data);
+    $(".answer-box").each(function () {
+      const option = $(this).data("option");
+      const p = $(this).find("#submitter");
+      p.text(`Submitter: ${data[option - 1]}`);
     });
   }
 }
