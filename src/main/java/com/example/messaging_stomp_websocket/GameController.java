@@ -1,5 +1,6 @@
 package com.example.messaging_stomp_websocket;
 
+import java.lang.reflect.Array;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,6 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -77,6 +79,9 @@ public class GameController {
             System.out.println("starting round");
             ArrayList<Player> playerList = PlayerController.playerList;
             ArrayList<Player> selectedPlayers = new ArrayList<>();
+            voteList = new int[4];
+            votes = 0;
+
             if (playerList.size() <= PLAYERS_PER_ROUND) {
                 for (Player player : playerList) {
                     selectedPlayers.add(player);
@@ -139,9 +144,23 @@ public class GameController {
         }
     }
 
+    public static int[] voteList = new int[4];
+    public static int votes = 0;
+
     @MessageMapping("/vote")
-    @SendTo("/topic/voting")
-    public void onVote() throws Exception {
-        // last doing this
+    public void onVote(Vote vote) throws Exception {
+        votes++;
+        int option = vote.getOption();
+        voteList[option - 1]++;
+        System.out.println(voteList.toString());
+
+        JSONObject json = new JSONObject();
+        json.put("voter", vote.getSubmitter());
+        json.put("option", option);
+
+        simpMessagingTemplate.convertAndSend("/topic/voting", new MessageContent("vote", json.toJSONString()));
+        if (votes == votersList.size()) {
+            simpMessagingTemplate.convertAndSend("/topic/voting", new MessageContent("votingend"));
+        }
     }
 }
