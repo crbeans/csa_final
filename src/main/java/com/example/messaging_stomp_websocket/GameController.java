@@ -140,6 +140,8 @@ public class GameController {
                         .collect(Collectors.toList());
                 simpMessagingTemplate.convertAndSendToUser(Integer.toString(player.getPID()), "/topic/main",
                         new MessageContent("votingOn", JSONArray.toJSONString(justAnswers)));
+                simpMessagingTemplate.convertAndSend("/topic/voting",
+                        new MessageContent("votingOn", JSONArray.toJSONString(justAnswers)));
             }
         }
     }
@@ -160,7 +162,8 @@ public class GameController {
 
         simpMessagingTemplate.convertAndSend("/topic/voting", new MessageContent("vote", json.toJSONString()));
         if (votes == votersList.size()) {
-            simpMessagingTemplate.convertAndSend("/topic/voting", new MessageContent("votingend"));
+            // simpMessagingTemplate.convertAndSend("/topic/voting", new
+            // MessageContent("votingend"));
             onVotingComplete();
         }
     }
@@ -174,5 +177,13 @@ public class GameController {
         }
         System.out.println(
                 answerList.get(winner).getSubmitter() + " won! They said " + answerList.get(winner).getAnswer());
+
+        JSONArray jsonArray = new JSONArray();
+
+        for (int number : voteList) {
+            jsonArray.add(number);
+        }
+        simpMessagingTemplate.convertAndSend("/topic/voting",
+                new MessageContent("votingend", jsonArray.toJSONString()));
     }
 }
