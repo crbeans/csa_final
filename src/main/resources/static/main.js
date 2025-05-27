@@ -12,11 +12,19 @@ function setConnected(val) {
 
 function startGame() {}
 
+function startRound() {
+  $(".answer-box").each(function () {
+    const p = $(this).find(".option-header");
+    p.addClass("d-none");
+  });
+}
+
 function onMainMessage(msg) {
-  const content = JSON.parse(msg.body).content;
+  const message = JSON.parse(msg.body);
   const data = JSON.parse(msg.body).data;
-  if (content == "gamestart") {
+  if (message.content == "gamestart") {
     $("#statusText").text("Game Started");
+    startRound();
   }
 }
 
@@ -28,12 +36,38 @@ function onPlayerJoin(msg) {
   $("#playersListTableHeader").text("Players - " + players);
 }
 
-let mainSub, joinedSub;
+function onVoting(msg) {
+  const message = JSON.parse(msg.body);
+  if (message.content == "votingend") {
+    const data = JSON.parse(message.data);
+    $(".answer-box").each(function () {
+      const option = $(this).data("option");
+      const p = $(this).find("p");
+      $(this)
+        .find("p")
+        .text(`Votes: ${data[option - 1]}`);
+      $(this).find("p").removeClass("d-none");
+    });
+  } else if (message.content == "votingOn") {
+    const data = JSON.parse(message.data);
+    $(".answer-box").each(function () {
+      const option = $(this).data("option");
+      const p = $(this).find(".option-header");
+      $(this)
+        .find(".option-header")
+        .text(`${data[option - 1]}`);
+    });
+  }
+}
+
+let mainSub, joinedSub, votingSub;
 function onConnect() {
   connect().then(() => {
+    console.log("Connected to websocket");
     setConnected(true);
     mainSub = subscribeTo("/topic/main", (msg) => onMainMessage(msg));
     joinedSub = subscribeTo("/topic/joined", (msg) => onPlayerJoin(msg));
+    votingSub = subscribeTo("/topic/voting", (msg) => onVoting(msg));
   });
 }
 

@@ -10,9 +10,10 @@ let mainSub, joinedSub, userSub;
 
 function onSubmitAnswer() {
   publishMsg("/app/submit", {
-    answer: $("#answer").val(),
+    answer: $("#playerAnswer").val(),
     submitter: playerName,
   });
+  $("#submitAnswer").addClass("disabled");
 }
 
 function startGame() {
@@ -28,15 +29,34 @@ function onMain(msg) {
 
 function onUserMain(msg) {
   const message = JSON.parse(msg.body);
+  console.log(message);
   if (message.content == "answerprompt") {
     $("#statusSection").addClass("hidden");
     $("#answerSection").removeClass("hidden");
     $("#prompt").text(message.data);
   } else if (message.content == "voting") {
+    $("#statusText").text("Waiting for responses to be submitted");
+  } else if (message.content == "votingOn") {
+    const data = JSON.parse(message.data);
     $("#statusSection").addClass("hidden");
     $("#votingSection").removeClass("hidden");
-    $("#statusText").text("Waiting for responses to be submitted");
+    // $("#answer1").text(data[0]);
+    // $("#answer2").text(data[1]);
+    $(".answer-button").each(function () {
+      const option = parseInt($(this).data("option"));
+      $(this).text(data[option - 1]);
+    });
   }
+}
+
+function onVote(option) {
+  publishMsg("/app/vote", {
+    option: option,
+    submitter: playerName,
+  });
+  $("#votingSection").addClass("hidden");
+  $("#statusSection").removeClass("hidden");
+  $("#statusText").text("Vote submitted!");
 }
 
 $(function () {
@@ -60,4 +80,9 @@ $(function () {
   }
 
   $("#submitAnswer").click(() => onSubmitAnswer());
+  $(".vote-box").click(function () {
+    const answer = $(this).find(".answer-button");
+    const option = answer.data("option");
+    onVote(option);
+  });
 });
