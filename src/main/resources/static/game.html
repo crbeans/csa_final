@@ -81,7 +81,7 @@
     <div id="answerSection">
         <div class="prompt-box">
             <h4 id="prompt">What's the weirdest thing to find in your fridge?</h4>
-            <input type="text" id="playerAnswer" class="form-control form-control-lg mt-3" placeholder="Enter Answer" required>
+            <input type="text" id="joinButton" class="form-control form-control-lg mt-3" placeholder="Enter Answer" required>
             <button class="btn btn-primary mt-4 btn-lg" type="button" onClick="submitAnswer()">Submit Answer</button>
         </div> 
     </div>
@@ -93,12 +93,12 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="vote-box" onclick="vote(1)">
-                    <p id="submitAnswer">Option 1</p>
+                    <p id="answer1">Option 1</p>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="vote-box" onclick="vote(2)">
-                    <p id="submitAnswer">Option 2</p>
+                    <p id="answer2">Option 2</p>
                 </div>
             </div>
         </div>
@@ -110,7 +110,7 @@
     <!--Answer submission and voting by toggling section visibility and disabling repeat votes--> 
     <script>
         function submitAnswer() {
-            const answer = document.getElementById("playerAnswer").value;
+        const answer = document.getElementById("joinButton").value;
         document.getElementById("answerSection").classList.add("hidden");
         document.getElementById("votingSection").classList.remove("hidden");
         document.getElementById("gameTitle").classList.add("hidden");
