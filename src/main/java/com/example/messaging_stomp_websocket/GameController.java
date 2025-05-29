@@ -220,22 +220,47 @@ public class GameController {
     }
 
     public void onVotingComplete() throws Exception {
-        int winner = 0;
-        for (int i = 0; i < voteList.length; i++) {
-            if (voteList[i] > winner) {
-                winner = i;
+        int maxVotes = 0;
+
+        // Step 1: Find max vote count
+        for (int votes : voteList) {
+            if (votes > maxVotes) {
+                maxVotes = votes;
             }
         }
-        System.out.println(
-                answerList.get(winner).getSubmitter() + " won! They said " + answerList.get(winner).getAnswer());
 
-        JSONArray jsonArray = new JSONArray();
-
-        for (int number : voteList) {
-            jsonArray.add(number);
+        // Step 2: Collect all indices with maxVotes
+        List<Integer> winners = new ArrayList<>();
+        for (int i = 0; i < voteList.length; i++) {
+            if (voteList[i] == maxVotes) {
+                winners.add(i);
+            }
         }
+
+        // Step 3: Report all winners
+        for (int winnerIndex : winners) {
+            Answer winnerAnswer = answerList.get(winnerIndex);
+            System.out
+                    .println(winnerAnswer.getSubmitter() + " won/tied! They said \"" + winnerAnswer.getAnswer() + "\"");
+        }
+
+        // Step 4: Send vote result data
+        JSONArray voteCounts = new JSONArray();
+        for (int number : voteList) {
+            voteCounts.add(number);
+        }
+
+        JSONArray winnerIndices = new JSONArray();
+        for (int winnerIndex : winners) {
+            winnerIndices.add(winnerIndex); // These are the indices of the tied winners
+        }
+
+        JSONObject json = new JSONObject();
+        json.put("voteCounts", voteCounts);
+        json.put("winners", winnerIndices);
+
         simpMessagingTemplate.convertAndSend("/topic/voting",
-                new MessageContent("votingend", jsonArray.toJSONString()));
+                new MessageContent("votingend", json.toJSONString()));
     }
 
     @PostConstruct
