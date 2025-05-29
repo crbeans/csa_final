@@ -91,13 +91,37 @@
       
 
       <!-- Prompt Answer Section -->
-      <div id="answerSection" class="hidden">
+      <!-- <div id="answerSection" class="hidden">
         <div class="prompt-box">
             <h4 id="prompt">What's the weirdest thing to find in your fridge?</h4>
             <input type="text" id="joinButton" class="form-control form-control-lg mt-3" placeholder="Enter Answer" required>
             <button class="btn btn-primary mt-4 btn-lg" type="button" onClick="submitAnswer()">Submit Answer</button>
         </div> 
+    </div> -->
+
+    <!-- Waiting for game to start -->
+    <div id="statusSection" class="prompt-box">
+      <h3 id="statusText">Waiting for game to start</h3>
+      <div class="d-flex d-flex-row">
+        <div id="playerName">You are:</div>
+      </div>
     </div>
+    <div class="prompt-box d-none" id="promptSection">
+            <h4 id="prompt">Waiting for prompt...</h4>
+            <input
+              type="text"
+              id="playerAnswer"
+              class="form-control form-control-lg mt-3"
+              placeholder="Enter Answer"
+              required
+            />
+            <button
+              class="btn btn-primary mt-4 btn-lg"
+              type="submit"
+              id="submitAnswer"
+            >
+              Submit Answer
+            </button>
 
     <div class="prompt-box">
             <!-- Waiting for game to start -->
@@ -123,8 +147,8 @@
             Submit Answer
           </button>
           </div>
-        </div>
       </div>
+    </div>
 
       <!--Image -->
 <div class="d-flex justify-content-between align-items-start">
@@ -141,29 +165,29 @@
 
 
       <!-- Voting Section -->
-      <div id="votingSection" class="hidden">
+      <div id="votingSection" class="d-none">
         <h1 class="mb-4">Vote for the Best Answer!</h1>
         <h3 class="mb-4">Look at the TV to see the options</h3>
         <div class="row">
           <div class="col-md-6">
-            <div class="vote-box" onclick="vote(1)">
+            <div class="vote-box">
               <p class="answer-button" data-option="1">Option 1</p>
             </div>
           </div>
           <div class="col-md-6">
-            <div class="vote-box" onclick="vote(2)">
+            <div class="vote-box">
               <p class="answer-button" data-option="2">Option 2</p>
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col-md-6">
-            <div class="vote-box" onclick="vote(1)">
+            <div class="vote-box">
               <p class="answer-button" data-option="3">Option 3</p>
             </div>
           </div>
           <div class="col-md-6">
-            <div class="vote-box" onclick="vote(2)">
+            <div class="vote-box">
               <p class="answer-button" data-option="4">Option 4</p>
             </div>
           </div>
@@ -179,7 +203,7 @@
 <!--Answer submission and voting by toggling section visibility and disabling repeat votes-->
 <!-- <script>--> 
     <!--Answer submission and voting by toggling section visibility and disabling repeat votes--> 
-    <script>
+    <!-- <script>
         function submitAnswer() {
         const answer = document.getElementById("joinButton").value;
       function submitAnswer() {
@@ -197,6 +221,6 @@
         document.getElementById("answer2").parentNode.classList.add("disabled");
         document.getElementById("voted-message").classList.remove("hidden");
       }
-    </script> 
+    </script>  -->
   </body>
 </html>

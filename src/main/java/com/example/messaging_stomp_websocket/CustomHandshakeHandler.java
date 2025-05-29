@@ -15,7 +15,7 @@ public class CustomHandshakeHandler extends DefaultHandshakeHandler {
             Map<String, Object> attributes) {
         String pid = Integer.toString(PlayerController.getUniquePID());
 
-        System.out.println(pid);
+        // System.out.println(pid);
 
         return new Principal() {
             @Override

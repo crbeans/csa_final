@@ -36,9 +36,9 @@ public class PlayerController {
         Player a = new Player(joiningPlayer.getName(), Integer.parseInt(principal.getName()));
         System.out.println("Player Joined: " + joiningPlayer.getName());
         playerList.add(a);
-        for (Player player : playerList) {
-            System.out.println(player.getName() + "," + player.getPID());
-        }
+        // for (Player player : playerList) {
+        // System.out.println(player.getName() + "," + player.getPID());
+        // }
         return new MessageContent(a.getName() + " has joined!", Integer.toString(a.getPID()));
     }
 
