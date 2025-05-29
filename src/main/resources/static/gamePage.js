@@ -43,11 +43,17 @@ function onUserMain(msg) {
     const data = JSON.parse(message.data);
     $("#statusSection").addClass("d-none");
     $("#votingSection").removeClass("d-none");
-    // $("#answer1").text(data[0]);
-    // $("#answer2").text(data[1]);
-    $(".answer-button").each(function () {
-      const option = parseInt($(this).data("option"));
-      $(this).text(data[option - 1]);
+
+    $(".vote-box").each(function () {
+      const option = parseInt($(this).find(".answer-button").data("option"));
+      const answer = data[option - 1];
+
+      if (answer !== undefined && answer !== null && answer !== "") {
+        $(this).removeClass("d-none");
+        $(this).find("#answerText").text(answer);
+      } else {
+        $(this).addClass("d-none");
+      }
     });
   }
 }

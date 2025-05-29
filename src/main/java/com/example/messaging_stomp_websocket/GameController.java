@@ -188,6 +188,8 @@ public class GameController {
                         .collect(Collectors.toList());
                 simpMessagingTemplate.convertAndSendToUser(Integer.toString(player.getPID()), "/topic/main",
                         new MessageContent("votingOn", JSONArray.toJSONString(justAnswers)));
+                simpMessagingTemplate.convertAndSend("/topic/main",
+                        new MessageContent("votingOnPrompt", promptList.get(lastPromptIndex - 1)));
                 simpMessagingTemplate.convertAndSend("/topic/voting",
                         new MessageContent("votingOn", JSONArray.toJSONString(justAnswers)));
                 simpMessagingTemplate.convertAndSend("/topic/voting",
@@ -221,9 +223,10 @@ public class GameController {
 
     public void onVotingComplete() throws Exception {
         int maxVotes = 0;
+        int[] voteListL = Arrays.copyOfRange(voteList, 0, playersThisRound);
 
         // Step 1: Find max vote count
-        for (int votes : voteList) {
+        for (int votes : voteListL) {
             if (votes > maxVotes) {
                 maxVotes = votes;
             }
@@ -231,8 +234,8 @@ public class GameController {
 
         // Step 2: Collect all indices with maxVotes
         List<Integer> winners = new ArrayList<>();
-        for (int i = 0; i < voteList.length; i++) {
-            if (voteList[i] == maxVotes) {
+        for (int i = 0; i < voteListL.length; i++) {
+            if (voteListL[i] == maxVotes) {
                 winners.add(i);
             }
         }
@@ -246,7 +249,7 @@ public class GameController {
 
         // Step 4: Send vote result data
         JSONArray voteCounts = new JSONArray();
-        for (int number : voteList) {
+        for (int number : voteListL) {
             voteCounts.add(number);
         }
 

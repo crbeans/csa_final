@@ -39,6 +39,9 @@ function onMainMessage(msg) {
   if (message.content == "gamestart") {
     $("#statusText").text("Game Started");
     startRound();
+  } else if (message.content == "votingOnPrompt") {
+    console.log(message.data);
+    $("#statusText").text("The prompt: " + message.data);
   }
 }
 
