@@ -22,6 +22,8 @@ import com.example.messaging_stomp_websocket.Answers.RecAnswer;
 import com.example.messaging_stomp_websocket.Players.Player;
 import com.example.messaging_stomp_websocket.Players.PlayerController;
 
+import jakarta.annotation.PostConstruct;
+
 @Controller
 public class GameController {
 
@@ -59,13 +61,19 @@ public class GameController {
                 editPlayerList.add(player);
             }
             return new MessageContent("gamestart");
+        } else {
+            return new MessageContent("gamestart");
         }
-        return new MessageContent("none");
     }
+
+    private static int playersThisRound = 0;
+
+    private static ArrayList<Player> usedPlayers = new ArrayList<>();
 
     @MessageMapping("/manageGame")
     @SendTo("/topic/main")
     public MessageContent manageGame(MessageContent msg) throws Exception {
+
         String content = msg.getContent();
         String data = msg.getData();
         if (content.equals("getplayersjson")) {
@@ -76,44 +84,81 @@ public class GameController {
             }
             return new MessageContent(playerListJSON.toJSONString());
         } else if (content.equals("startround")) {
+
             System.out.println("starting round");
-            ArrayList<Player> playerList = PlayerController.playerList;
             ArrayList<Player> selectedPlayers = new ArrayList<>();
             voteList = new int[4];
             votes = 0;
+            if (editPlayerList.size() <= PLAYERS_PER_ROUND) {
+                System.out.println("here");
 
-            if (playerList.size() <= PLAYERS_PER_ROUND) {
-                for (Player player : playerList) {
+                playersThisRound = editPlayerList.size();
+
+                for (Player player : editPlayerList) {
                     selectedPlayers.add(player);
                 }
+
+                votersList = new ArrayList<>(usedPlayers);
+                for (Player player : usedPlayers) {
+                    simpMessagingTemplate.convertAndSendToUser(Integer.toString(player.getPID()), "/topic/main",
+                            new MessageContent("voting"));
+                }
+
                 for (Player player : selectedPlayers) {
                     simpMessagingTemplate.convertAndSendToUser(Integer.toString(player.getPID()), "/topic/main",
                             new MessageContent("answerprompt", promptList.get(lastPromptIndex)));
+                    usedPlayers.add(player);
                 }
             } else {
+                System.out.println("there");
                 // get player list from PlayerController and get first PLAYERS_PER_ROUND players
                 // and remove them
                 // from editPlayerList
-                editPlayerList = new ArrayList<>(PlayerController.playerList);
+                // editPlayerList = new ArrayList<>(PlayerController.playerList);
                 int count = Math.min(PLAYERS_PER_ROUND, editPlayerList.size());
+                playersThisRound = count;
                 List<Player> currentSelection = new ArrayList<>(editPlayerList.subList(0, count));
                 selectedPlayers.addAll(currentSelection);
                 editPlayerList.subList(0, count).clear(); // remove from editPlayerList
+                // for (int i = 0; i < count; i++) {
+                // editPlayerList.remove(i);
+                // i--;
+                // }
 
-                for (Player player : currentSelection) {
-                    simpMessagingTemplate.convertAndSendToUser(Integer.toString(player.getPID()), "/topic/main",
-                            new MessageContent("answerprompt", promptList.get(lastPromptIndex)));
-                }
                 votersList = new ArrayList<>(editPlayerList);
                 for (Player player : editPlayerList) {
                     simpMessagingTemplate.convertAndSendToUser(Integer.toString(player.getPID()), "/topic/main",
                             new MessageContent("voting"));
                 }
+                for (Player player : usedPlayers) {
+                    simpMessagingTemplate.convertAndSendToUser(Integer.toString(player.getPID()), "/topic/main",
+                            new MessageContent("voting"));
+                }
+                for (Player player : currentSelection) {
+                    simpMessagingTemplate.convertAndSendToUser(Integer.toString(player.getPID()), "/topic/main",
+                            new MessageContent("answerprompt", promptList.get(lastPromptIndex)));
+                    usedPlayers.add(player);
+                }
             }
 
-            System.out.println(selectedPlayers);
-
             lastPromptIndex++;
+        } else if (content.equals("resetplayerlist12344")) {
+            System.out.println("resetting all lists");
+            editPlayerList = new ArrayList<>();
+            votersList = new ArrayList<>();
+            answerList = new ArrayList<>();
+            voteList = new int[4];
+            playersThisRound = 0;
+        } else if (content.equals("newround")) {
+            System.out.println("empying tables for new round");
+            votersList = new ArrayList<>();
+            answerList = new ArrayList<>();
+            voteList = new int[4];
+            playersThisRound = 0;
+            recievedAnswers = 0;
+        } else if (content.equals("initEditList")) {
+            System.out.println("init edit list");
+            editPlayerList = new ArrayList<>(PlayerController.playerList);
         }
         return null;
     }
@@ -132,7 +177,7 @@ public class GameController {
 
     public void monitorSubmissions() {
         recievedAnswers++;
-        if (recievedAnswers == PLAYERS_PER_ROUND) {
+        if (recievedAnswers == playersThisRound) {
             // ArrayList<Answer> answers = AnswerController.getAnswerList();
             for (Player player : votersList) {
                 List<String> justAnswers = answerList.stream()
@@ -192,4 +237,10 @@ public class GameController {
         simpMessagingTemplate.convertAndSend("/topic/voting",
                 new MessageContent("votingend", jsonArray.toJSONString()));
     }
+
+    @PostConstruct
+    public void postConstruct() {
+        System.out.println("GameController initialized");
+    }
+
 }

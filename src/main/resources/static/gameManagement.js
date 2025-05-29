@@ -52,4 +52,16 @@ $(function () {
   $("#startRound").click(() => {
     publishMsg("/app/manageGame", { content: "startround" });
   });
+  $("#resetPlayerList").click(() => {
+    publishMsg("/app/manageGame", { content: "resetplayerlist12344" });
+  });
+  $("#startNewRound").click(() => {
+    publishMsg("/app/manageGame", { content: "newround" });
+  });
+  $("#initEditList").click(() => {
+    publishMsg("/app/manageGame", { content: "initEditList" });
+  });
+  $("#resetUserUI").click(() => {
+    publishMsg("/app/startGame", { content: "4321" });
+  });
 });

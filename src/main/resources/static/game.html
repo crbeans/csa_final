@@ -84,49 +84,48 @@
 <body>
     <div class="container py-5 text-center text-light">
         <h1 id="gameTitle" class="mb-5"><span class="text-warning"> Answer Antics </span> - Enter Your Funniest Answer!</h1>
-        <h3 id="gameChosen" class="mb-5">You have been chosen!</h3>
     <div>
 
       
 
       <!-- Prompt Answer Section -->
-      <div id="answerSection" class="hidden">
+      <!-- <div id="answerSection" class="hidden">
         <div class="prompt-box">
             <h4 id="prompt">What's the weirdest thing to find in your fridge?</h4>
             <input type="text" id="joinButton" class="form-control form-control-lg mt-3" placeholder="Enter Answer" required>
             <button class="btn btn-primary mt-4 btn-lg" type="button" onClick="submitAnswer()">Submit Answer</button>
         </div> 
+    </div> -->
+
+    <!-- Waiting for game to start -->
+    <div id="statusSection" class="prompt-box">
+      <h3 id="statusText">Waiting for game to start</h3>
+      <div class="d-flex d-flex-row">
+        <div id="playerName">You are:</div>
+      </div>
+    </div>
+    <div class="prompt-box d-none" id="promptSection">
+            <h4 id="prompt">Waiting for prompt...</h4>
+            <input
+              type="text"
+              id="playerAnswer"
+              class="form-control form-control-lg mt-3"
+              placeholder="Enter Answer"
+              required
+            />
+            <button
+              class="btn btn-primary mt-4 btn-lg"
+              type="submit"
+              id="submitAnswer"
+            >
+              Submit Answer
+            </button>
+          </div>
+      </div>
     </div>
 
-    <div class="prompt-box">
-            <!-- Waiting for game to start -->
-            <div id="statusSection" class="">
-              <h3 id="statusText">Waiting for game to start</h3>
-                <div class="d-flex d-flex-row">
-                    <div id="playerName">You are:</div>
-                </div>
-            </div>
-          <h4 id="prompt">Waiting for prompt...</h4>
-          <input
-            type="text"
-            id="playerAnswer"
-            class="form-control form-control-lg mt-3"
-            placeholder="Enter Answer"
-            required
-          />
-          <button
-            class="btn btn-primary mt-4 btn-lg"
-            type="button"
-            id="submitAnswer"
-          >
-            Submit Answer
-          </button>
-          </div>
-        </div>
-      </div>
-
       <!-- Voting Section -->
-      <div id="votingSection" class="hidden">
+      <div id="votingSection" class="d-none">
         <h1 class="mb-4">Vote for the Best Answer!</h1>
         <h3 class="mb-4">Look at the TV to see the options</h3>
         <div class="row">
@@ -164,7 +163,7 @@
 <!--Answer submission and voting by toggling section visibility and disabling repeat votes-->
 <!-- <script>--> 
     <!--Answer submission and voting by toggling section visibility and disabling repeat votes--> 
-    <script>
+    <!-- <script>
         function submitAnswer() {
         const answer = document.getElementById("joinButton").value;
       function submitAnswer() {
@@ -182,6 +181,6 @@
         document.getElementById("answer2").parentNode.classList.add("disabled");
         document.getElementById("voted-message").classList.remove("hidden");
       }
-    </script> 
+    </script>  -->
   </body>
 </html>

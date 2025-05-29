@@ -18,6 +18,9 @@ function onSubmitAnswer() {
 
 function startGame() {
   $("#statusText").text("Game Started.");
+  $("#promptSection").addClass("d-none");
+  $("#statusSection").removeClass("d-none");
+  $("#submitAnswer").removeClass("disabled");
 }
 
 function onMain(msg) {
@@ -31,15 +34,15 @@ function onUserMain(msg) {
   const message = JSON.parse(msg.body);
   console.log(message);
   if (message.content == "answerprompt") {
-    $("#statusSection").addClass("hidden");
-    $("#answerSection").removeClass("hidden");
+    $("#statusSection").addClass("d-none");
+    $("#promptSection").removeClass("d-none");
     $("#prompt").text(message.data);
   } else if (message.content == "voting") {
     $("#statusText").text("Waiting for responses to be submitted");
   } else if (message.content == "votingOn") {
     const data = JSON.parse(message.data);
-    $("#statusSection").addClass("hidden");
-    $("#votingSection").removeClass("hidden");
+    $("#statusSection").addClass("d-none");
+    $("#votingSection").removeClass("d-none");
     // $("#answer1").text(data[0]);
     // $("#answer2").text(data[1]);
     $(".answer-button").each(function () {
