@@ -138,10 +138,16 @@ public class GameController {
                 List<String> justAnswers = answerList.stream()
                         .map(Answer::getAnswer)
                         .collect(Collectors.toList());
+                List<String> justSubmitters = answerList.stream()
+                        .map(Answer::getSubmitter)
+                        .collect(Collectors.toList());
                 simpMessagingTemplate.convertAndSendToUser(Integer.toString(player.getPID()), "/topic/main",
                         new MessageContent("votingOn", JSONArray.toJSONString(justAnswers)));
                 simpMessagingTemplate.convertAndSend("/topic/voting",
                         new MessageContent("votingOn", JSONArray.toJSONString(justAnswers)));
+                simpMessagingTemplate.convertAndSend("/topic/voting",
+                        new MessageContent("votingOnSubmitters", JSONArray.toJSONString(justSubmitters)));
+
             }
         }
     }
