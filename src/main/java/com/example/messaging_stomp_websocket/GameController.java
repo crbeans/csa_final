@@ -1,6 +1,5 @@
 package com.example.messaging_stomp_websocket;
 
-import java.lang.reflect.Array;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,7 +16,6 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
 import com.example.messaging_stomp_websocket.Answers.Answer;
-import com.example.messaging_stomp_websocket.Answers.AnswerController;
 import com.example.messaging_stomp_websocket.Answers.RecAnswer;
 import com.example.messaging_stomp_websocket.Players.Player;
 import com.example.messaging_stomp_websocket.Players.PlayerController;
@@ -31,8 +29,6 @@ public class GameController {
     private SimpMessagingTemplate simpMessagingTemplate;
 
     private static ArrayList<Player> editPlayerList;
-
-    private static int lastPlayerIndex = 0;
 
     private static ArrayList<String> promptList = new ArrayList<>(Arrays.asList(
             "The worst thing to hear during a job interview.",
@@ -77,12 +73,12 @@ public class GameController {
         String content = msg.getContent();
         String data = msg.getData();
         if (content.equals("getplayersjson")) {
-            ArrayList<Player> playerList = PlayerController.playerList;
+            ArrayList<Player> playerList = new ArrayList<>(PlayerController.playerList);
             JSONArray playerListJSON = new JSONArray();
             for (Player player : playerList) {
-                playerListJSON.add(player.toJSON());
+                playerListJSON.add(player.getName());
             }
-            return new MessageContent(playerListJSON.toJSONString());
+            return new MessageContent("getplayersjson", playerListJSON.toJSONString());
         } else if (content.equals("startround")) {
 
             System.out.println("starting round");
@@ -131,6 +127,7 @@ public class GameController {
                             new MessageContent("voting"));
                 }
                 for (Player player : usedPlayers) {
+                    votersList.add(player);
                     simpMessagingTemplate.convertAndSendToUser(Integer.toString(player.getPID()), "/topic/main",
                             new MessageContent("voting"));
                 }
@@ -177,8 +174,11 @@ public class GameController {
 
     public void monitorSubmissions() {
         recievedAnswers++;
+        System.out.println("recieved:" + recievedAnswers + "playersthisround" + playersThisRound);
         if (recievedAnswers == playersThisRound) {
             // ArrayList<Answer> answers = AnswerController.getAnswerList();
+            System.out.println("submissions finished");
+            System.out.println("voterslist:" + votersList);
             for (Player player : votersList) {
                 List<String> justAnswers = answerList.stream()
                         .map(Answer::getAnswer)
@@ -214,6 +214,8 @@ public class GameController {
         json.put("option", option);
 
         simpMessagingTemplate.convertAndSend("/topic/voting", new MessageContent("vote", json.toJSONString()));
+
+        System.out.println("votes:" + votes + "voterslistsize:" + votersList.size());
         if (votes == votersList.size()) {
             // simpMessagingTemplate.convertAndSend("/topic/voting", new
             // MessageContent("votingend"));

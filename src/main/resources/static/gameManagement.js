@@ -21,15 +21,15 @@ function onClick() {
       );
     });
     subscribeTo("/topic/main", (msg) => {
-      $("#mainWS").append(
-        "<tr><td>" +
-          new Date().toLocaleTimeString() +
-          " | " +
-          JSON.parse(msg.body).content +
-          " | " +
-          JSON.parse(msg.body).data +
-          "</tr></td>"
-      );
+      const content = JSON.parse(msg.body).content;
+      if (content == "getplayersjson") {
+        $("#players").empty();
+        const data = JSON.parse(JSON.parse(msg.body).data);
+        for (let index = 0; index < data.length; index++) {
+          const element = data[index];
+          $("#players").append("<tr><td>" + element + "</td></tr>");
+        }
+      }
     });
   });
 }
@@ -42,11 +42,11 @@ $(function () {
   onClick();
   $("#connect").click(() => onClick());
   $("#startGame").click(() => startGame());
-  $("#players").on("click", ".kick-player", function () {
+  $("#playersTable").on("click", ".kick-player", function () {
     const pid = $(this).data("player");
     publishMsg("/app/kickPlayer", { content: pid });
   });
-  $("#selectPlayers").click(() => {
+  $("#refreshPlayerList").click(() => {
     publishMsg("/app/manageGame", { content: "getplayersjson" });
   });
   $("#startRound").click(() => {

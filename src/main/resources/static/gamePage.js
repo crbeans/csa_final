@@ -55,6 +55,8 @@ function onUserMain(msg) {
         $(this).addClass("d-none");
       }
     });
+  } else if (message.content == "kicked") {
+    alert("You have been kicked, someone joined with the same name.");
   }
 }
 
@@ -63,7 +65,7 @@ function onVote(option) {
     option: option,
     submitter: playerName,
   });
-  $("#votingSection").addClass("hidden");
+  $("#votingSection").addClass("d-none");
   $("#statusSection").removeClass("hidden");
   $("#statusText").text("Vote submitted!");
 }
