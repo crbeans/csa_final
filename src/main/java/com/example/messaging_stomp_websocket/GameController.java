@@ -30,6 +30,7 @@ public class GameController {
 
     private static ArrayList<Player> editPlayerList;
 
+    // list of possible prompts
     private static ArrayList<String> promptList = new ArrayList<>(Arrays.asList(
             "The worst thing to hear during a job interview.",
             "The secret ingredient in grandma's mystery casserole.",
@@ -48,6 +49,7 @@ public class GameController {
     private static ArrayList<Player> votersList;
     private static int recievedAnswers = 0;
 
+    // add players to edit player list to be edited
     @MessageMapping("/startGame")
     @SendTo("/topic/main")
     public MessageContent startGame(MessageContent msg) throws Exception {
@@ -202,6 +204,7 @@ public class GameController {
     public static int[] voteList = new int[4];
     public static int votes = 0;
 
+    // handle each vote
     @MessageMapping("/vote")
     public void onVote(Vote vote) throws Exception {
         votes++;
@@ -223,18 +226,17 @@ public class GameController {
         }
     }
 
+    // handle voting being complete, send the winners to the main screen
     public void onVotingComplete() throws Exception {
         int maxVotes = 0;
         int[] voteListL = Arrays.copyOfRange(voteList, 0, playersThisRound);
 
-        // Step 1: Find max vote count
         for (int votes : voteListL) {
             if (votes > maxVotes) {
                 maxVotes = votes;
             }
         }
 
-        // Step 2: Collect all indices with maxVotes
         List<Integer> winners = new ArrayList<>();
         for (int i = 0; i < voteListL.length; i++) {
             if (voteListL[i] == maxVotes) {
@@ -242,14 +244,12 @@ public class GameController {
             }
         }
 
-        // Step 3: Report all winners
         for (int winnerIndex : winners) {
             Answer winnerAnswer = answerList.get(winnerIndex);
             System.out
                     .println(winnerAnswer.getSubmitter() + " won/tied! They said \"" + winnerAnswer.getAnswer() + "\"");
         }
 
-        // Step 4: Send vote result data
         JSONArray voteCounts = new JSONArray();
         for (int number : voteListL) {
             voteCounts.add(number);
@@ -257,7 +257,7 @@ public class GameController {
 
         JSONArray winnerIndices = new JSONArray();
         for (int winnerIndex : winners) {
-            winnerIndices.add(winnerIndex); // These are the indices of the tied winners
+            winnerIndices.add(winnerIndex); // these are the indexes of the tied winners
         }
 
         JSONObject json = new JSONObject();
